@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class PatrolWaypoints : MonoBehaviour
+public class WaypointsVisualiser : MonoBehaviour
 {
     private void OnDrawGizmos()
     {
