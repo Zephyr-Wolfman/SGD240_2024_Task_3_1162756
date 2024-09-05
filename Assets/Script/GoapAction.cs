@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary> 
+/// Defines the structure for pre-conditions, post-effects, and execution of actions.
+///  It's an abstract class and derived classes must implement methods
+/// </summary>
 public abstract class GoapAction : MonoBehaviour
 {
     public string actionName = "Action";
@@ -30,12 +34,14 @@ public abstract class GoapAction : MonoBehaviour
     [SerializeField]
     private bool actionInProgress = false;
 
+    // Initialises the dictionaries for pre-conditions and post-effects
     public void Action()
     {
         preConditionsDict = new Dictionary<string, int>();
         postEffectsDict = new Dictionary<string, int>();
     }
 
+    // Sets up the agent's NavMeshAGent and adds the pre-conditions and post-effects to dictionaries
     public void Awake()
     {
         agent = this.gameObject.GetComponent<NavMeshAgent>();
@@ -58,11 +64,13 @@ public abstract class GoapAction : MonoBehaviour
 
     }
 
+    // Returns true if the action can be achieved
     public bool IsAchievable()
     {
         return true;
     }
 
+    // Checks if the action can be achieved with the current world states
     public bool IsAchievableIf(Dictionary<string, int> conditions)
     {
         foreach (KeyValuePair<string, int> p in preConditionsDict)
@@ -75,6 +83,8 @@ public abstract class GoapAction : MonoBehaviour
         return true;
     }
 
+    // Abstract method for pre-action must be implemented by derived classes
     public abstract bool PrePerform();
+    // Abstract method for post-action must be implemented by derived classes
     public abstract bool PostPerform();
 }

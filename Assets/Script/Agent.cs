@@ -4,20 +4,10 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class SubGoal
-{
-    public Dictionary<string, int> sGoals;
-    public bool remove;
-
-    public SubGoal(string s, int i, bool r)
-    {
-        sGoals = new Dictionary<string,int>();
-        sGoals.Add(s,i);
-        remove = r;
-    }
-
-}
-
+/// <summary> 
+/// Manages available actions and goals.
+/// Actions are performed based on the goals and the output of the planner
+/// </summary>
 public class Agent : MonoBehaviour
 {
     public List<GoapAction> actions = new List<GoapAction>();
@@ -28,7 +18,7 @@ public class Agent : MonoBehaviour
     public GoapAction currentAction;
     private SubGoal currentGoal;
 
-    // Start is called before the first frame update
+    // Gets all GoapAction components attached to the agent and adds available actions to the action list
     void Start()
     {
         GoapAction[] acts = this.GetComponents<GoapAction>();
@@ -44,3 +34,22 @@ public class Agent : MonoBehaviour
         
     }
 }
+
+/// <summary> 
+/// Each sub-goal contains a dictionary with a key, a value, and a bool that determines removal
+/// </summary>
+public class SubGoal
+{
+    public Dictionary<string, int> sGoals;
+    public bool remove;
+
+    // Constructor to initialise sub-goal
+    public SubGoal(string s, int i, bool r)
+    {
+        sGoals = new Dictionary<string,int>();
+        sGoals.Add(s,i);
+        remove = r;
+    }
+
+}
+

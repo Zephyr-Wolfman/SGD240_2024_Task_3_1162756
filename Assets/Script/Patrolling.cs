@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Controls agent's patrolling behaviour between waypoints using the NavMeshAGent. 
+///  It allows the agent to update its destination as it reaches each waypoint
+/// </summary>
+
 public class Patrolling : MonoBehaviour
 {
     [SerializeField]
@@ -13,48 +18,70 @@ public class Patrolling : MonoBehaviour
     private int waypointIndex;
     private NavMeshAgent navMeshAgent;
 
+    // Initialise NavMeshAgent in Awake so it's available before other components need it
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    // Set the initial waypoint and populate the waypoints dictionary
     private void Start()
     {
-        currentWaypoint = waypoints[Random.Range(0, 11)].transform;
+        // Set the current waypoint to a random waypoint
+        currentWaypoint = waypoints[Random.Range(0, waypoints.Length)].transform;
+        // Set the location of the object to the current waypoint
         transform.position = currentWaypoint.position;
         InitialiseWaypointsDictionary();
     }
 
+    // Keep udating the current waypoint and patrol path
     private void Update()
     {
-        PatrolPath();
         GetCurrentWaypoint(out waypointIndex);
-
+        PatrolPath();
     }
 
+    // Set the destination to the next waypoint for patrolling
     private void PatrolPath()
     {
-        navMeshAgent.destination = GetNextWaypoint().position;
+        if (nextWaypoint != null)
+        {
+            navMeshAgent.destination = GetNextWaypoint().position;
+        }
+        else
+        {
+            nextWaypoint = GetNextWaypoint();
+            if (nextWaypoint != null)
+            {
+                navMeshAgent.destination = nextWaypoint.position;
+            }
+        }
     }
-
+    // Get the next waypoint based on the current waypoint index
     private Transform GetNextWaypoint()
     {
         if (waypointsDictionary.ContainsKey(waypointIndex))
         {
             int[] validIndices = waypointsDictionary[waypointIndex];
             int pathOptions = GetRandomWaypoint(validIndices);
-            nextWaypoint = waypoints[pathOptions].transform;
+
+            if (waypoints[pathOptions] != null)
+            {
+                nextWaypoint = waypoints[pathOptions].transform;
+            }
         }
-        
+
         return nextWaypoint;
     }
 
+    // Select random waypoint from valid options
     private int GetRandomWaypoint(params int[] waypointOptions)
     {
         int randomIndex = Random.Range(0, waypointOptions.Length);
         return waypointOptions[randomIndex];
     }
 
+    // Find the waypoint the agent is closest to
     private Transform GetCurrentWaypoint(out int index)
     {
         index = -1;
@@ -70,6 +97,7 @@ public class Patrolling : MonoBehaviour
         return currentWaypoint;
     }
 
+    // Initialise the dictionary that defines the valid paths from specific waypoints
     private void InitialiseWaypointsDictionary()
     {
         waypointsDictionary = new Dictionary<int, int[]>
