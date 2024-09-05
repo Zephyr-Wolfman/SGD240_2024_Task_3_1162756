@@ -19,7 +19,7 @@ public class Agent : MonoBehaviour
     private SubGoal currentGoal;
 
     // Gets all GoapAction components attached to the agent and adds available actions to the action list
-    void Start()
+    public void Start()
     {
         GoapAction[] acts = this.GetComponents<GoapAction>();
         foreach (GoapAction a in acts)
@@ -31,7 +31,7 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        
+        // Logic for planner execution
     }
 }
 
