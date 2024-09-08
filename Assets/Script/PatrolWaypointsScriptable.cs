@@ -7,7 +7,7 @@ public class PatrolWaypointsScriptable : ScriptableObject
 {
     public Dictionary<int, int[]> waypointsDictionary;
 
-    public InitialiseWaypointsDictionary()
+    public void InitialiseWaypointsDictionary()
     {
         waypointsDictionary = new Dictionary<int, int[]>
         {
