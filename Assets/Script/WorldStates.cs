@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+// WorldStates holds the actual states
+
 /// <summary> 
 /// Represents a single world state with a key-value pair. 
 ///  Defines the conditions that affect agent behaviour.

@@ -14,9 +14,10 @@ public class Patrolling : MonoBehaviour
     private GameObject[] waypoints;
     private Transform currentWaypoint;
     private Transform nextWaypoint;
-    private Dictionary<int, int[]> waypointsDictionary;
+    public Dictionary<int, int[]> waypointsDictionary;
     private int waypointIndex;
     private NavMeshAgent navMeshAgent;
+   
 
     // Initialise NavMeshAgent in Awake so it's available before other components need it
     private void Awake()
