@@ -17,19 +17,19 @@ public class GActionSO : ScriptableObject
 
     public Vector3 location;
 
-    [SerializeField]
-    private float energyLevel = 1f;
-    [SerializeField]
-    private float bladderLevel = 0f;
-    [SerializeField]
-    private float moraleLevel = 1f;
+    // [SerializeField]
+    // private float energyLevel = 0f;
+    // [SerializeField]
+    // private float bladderLevel = 0f;
+    // [SerializeField]
+    // private float moraleLevel = 0f;
 
     [SerializeField]
     private List<Conditions> PreCons = new List<Conditions>();
     [SerializeField]
     private List<Conditions> PostEffects = new List<Conditions>();
     
-    public void EffectAgentLevels()
+    public void SetAgentLevels()
     {
         
     }

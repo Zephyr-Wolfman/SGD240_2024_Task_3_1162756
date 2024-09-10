@@ -5,10 +5,11 @@ using UnityEngine;
 public class GAgent : GAgentBase
 {
 
-    private void Update()
-    {
-        Move();
-    }
+    // private override void Update()
+    // {
+    //     base.Update();
+    //     Move();
+    // }
 
     public void Move()
     {

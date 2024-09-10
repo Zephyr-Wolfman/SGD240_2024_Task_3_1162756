@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: 
   cost: 0
-  PreConBools: []
-  PreConFloats: []
-  PostEffectBools: []
-  PostEffectFloats: []
+  location: {x: 0, y: 0, z: 0}
+  energyLevel: 0
+  bladderLevel: 0
+  moraleLevel: 0
+  PreCons: []
+  PostEffects: []
