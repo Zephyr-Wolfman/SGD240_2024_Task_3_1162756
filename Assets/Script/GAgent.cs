@@ -13,6 +13,6 @@ public class GAgent : GAgentBase
 
     public void Move()
     {
-        navMeshAgent.destination = actions[0].location;
+        navMeshAgent.destination = actions[0].nextlocation;
     }
 }

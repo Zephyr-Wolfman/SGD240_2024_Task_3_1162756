@@ -14,18 +14,23 @@ public class GAgentBase : MonoBehaviour
     [SerializeField]
     protected float moraleLevel = 1f;
     [SerializeField]
+    protected float patrolQuota = 1f;
+    [SerializeField]
     protected bool ratDetected = false;
 
     [SerializeField]
     protected GActionSO[] actions;
     protected List<string> goals = new List<string>();
 
+    protected GWorldStates worldStates;
+
     protected UnityEngine.AI.NavMeshAgent navMeshAgent;
 
     protected void Awake()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        
+        worldStates = FindObjectOfType<GWorldStates>();
+
         goals.Add("Patrol");
         goals.Add("EmptyBladder");
         goals.Add("IncreaseEnergy");
@@ -37,6 +42,10 @@ public class GAgentBase : MonoBehaviour
     {
         SetGoalPriority();
         Debug.Log($"{goals[0]}");
+        Debug.Log($"{worldStates.GetWorldState("KitchenVacant")}");
+        SetWorldState(actions[0].PostEffects[0].state, actions[0].PostEffects[0].value);
+        Debug.Log($"{worldStates.GetWorldState("KitchenVacant")}");
+
     }
 
     protected void ReorderGoals(string goal, int index)
@@ -50,35 +59,47 @@ public class GAgentBase : MonoBehaviour
 
     protected void SetGoalPriority()
     {
-        if(energyLevel < bladderLevel && energyLevel < moraleLevel)
-        {
-            ReorderGoals("IncreaseEnergy", 0);
-        }
-        else if (bladderLevel < energyLevel && bladderLevel < moraleLevel)
-        {
-            ReorderGoals("EmptyBladder", 0);
-        }
-        else if (moraleLevel < energyLevel && moraleLevel < bladderLevel)
-        {
-            ReorderGoals("IncreaseMorale", 0);
-        }
-        else if (ratDetected)
+        if (ratDetected)
         {
             ReorderGoals("ChaseRat", 0);
+        }
+
+        else if (patrolQuota <= 0.5)
+        {
+            if (energyLevel < bladderLevel && energyLevel < moraleLevel)
+            {
+                ReorderGoals("IncreaseEnergy", 0);
+            }
+            else if (bladderLevel < energyLevel && bladderLevel < moraleLevel)
+            {
+                ReorderGoals("EmptyBladder", 0);
+            }
+            else if (moraleLevel < energyLevel && moraleLevel < bladderLevel)
+            {
+                ReorderGoals("IncreaseMorale", 0);
+            }
+            else
+            {
+                ReorderGoals("Patrol", 0);
+            }
         }
         else
         {
             ReorderGoals("Patrol", 0);
         }
+
+    }
+
+    protected void SetWorldState(string state, bool value)
+    {
+        worldStates.SetWorldState(state, value);
     }
 
 
 
-    
 
-    
 
- 
+
 
 
 }

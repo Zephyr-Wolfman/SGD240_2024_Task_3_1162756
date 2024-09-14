@@ -3,17 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// [System.Serializable]
-// public class WorldState
-// {
-//     public string state;
-//     public bool value;
-// }
 
 public class GWorldStates : MonoBehaviour
 {   
     private float coffeeLevel = 1;
     private Dictionary<string, bool> worldStates = new Dictionary<string, bool>();
+
+    private void Update()
+    {
+        
+    }
 
     public void WorldStates()
     {
