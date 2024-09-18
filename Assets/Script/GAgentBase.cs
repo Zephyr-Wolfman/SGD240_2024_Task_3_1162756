@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 
@@ -17,10 +17,13 @@ public class GAgentBase : MonoBehaviour
     protected float patrolQuota = 1f;
     [SerializeField]
     protected bool ratDetected = false;
-
     [SerializeField]
-    protected GActionSO[] actions;
-    protected List<string> goals = new List<string>();
+    protected int currentGoal = 0;
+
+    // [SerializeField]
+    // protected GActionSO[] actions;
+    [SerializeField]
+    protected List<GGoalSO> goals = new List<GGoalSO>();
 
     protected GWorldStates worldStates;
 
@@ -29,39 +32,42 @@ public class GAgentBase : MonoBehaviour
     protected void Awake()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        worldStates = FindObjectOfType<GWorldStates>();
-
-        goals.Add("Patrol");
-        goals.Add("EmptyBladder");
-        goals.Add("IncreaseEnergy");
-        goals.Add("IncreaseMorale");
-        goals.Add("ChaseRat");
+        worldStates = GWorld.Instance.GetWorldStates();
     }
 
     protected void Update()
     {
         SetGoalPriority();
-        Debug.Log($"{goals[0]}");
-        Debug.Log($"{worldStates.GetWorldState("KitchenVacant")}");
-        SetWorldState(actions[0].PostEffects[0].state, actions[0].PostEffects[0].value);
-        Debug.Log($"{worldStates.GetWorldState("KitchenVacant")}");
-
+        Move();
+        // ExecuteActionsPostEffects();
     }
 
-    protected void ReorderGoals(string goal, int index)
+    protected void ReorderGoals(string goalName, int index)
     {
-        if (goals.Contains(goal))
+        GGoalSO topGoal = null;
+
+        foreach (GGoalSO goal in goals)
         {
-            goals.Remove(goal);
-            goals.Insert(index, goal);
+            if (goal.GoalName.Contains(goalName))
+            {
+                topGoal = goal;
+                break;
+            }
         }
+        if (topGoal != null)
+        {
+            goals.Remove(topGoal);
+            goals.Insert(index, topGoal);
+        }
+
     }
 
     protected void SetGoalPriority()
     {
         if (ratDetected)
         {
-            ReorderGoals("ChaseRat", 0);
+            ReorderGoals("ScareRat", 0);
+            currentGoal = 1;
         }
 
         else if (patrolQuota <= 0.5)
@@ -69,23 +75,28 @@ public class GAgentBase : MonoBehaviour
             if (energyLevel < bladderLevel && energyLevel < moraleLevel)
             {
                 ReorderGoals("IncreaseEnergy", 0);
+                currentGoal = 3;
             }
             else if (bladderLevel < energyLevel && bladderLevel < moraleLevel)
             {
                 ReorderGoals("EmptyBladder", 0);
+                currentGoal = 2;
             }
             else if (moraleLevel < energyLevel && moraleLevel < bladderLevel)
             {
                 ReorderGoals("IncreaseMorale", 0);
+                currentGoal = 4;
             }
             else
             {
                 ReorderGoals("Patrol", 0);
+                currentGoal = 0;
             }
         }
         else
         {
             ReorderGoals("Patrol", 0);
+            currentGoal = 0;
         }
 
     }
@@ -95,11 +106,31 @@ public class GAgentBase : MonoBehaviour
         worldStates.SetWorldState(state, value);
     }
 
+    // protected void ExecuteActionsPostEffects()
+    // {
+    //     Debug.Log($"State: KitchenVacant is {worldStates.GetWorldState("KitchenVacant")}");
+    //     Debug.Log($"State: CoffeeAvailable is {worldStates.GetWorldState("CoffeeAvailable")}");
+    //     Debug.Log($"State: BathroomVacant is {worldStates.GetWorldState("BathroomVacant")}");
+    //     Debug.Log($"State: BunkVacant is {worldStates.GetWorldState("BunkVacant")}");
 
+    //     foreach (var action in actions)
+    //     {
+    //         var postEffects = action.PostEffects;
 
+    //         if (postEffects.Count > 0)
+    //         {
+    //             foreach (var effect in postEffects)
+    //             {
+    //                 SetWorldState(effect.state, effect.value);
+    //                 Debug.Log($"State: {effect.state} is {worldStates.GetWorldState(effect.state)}");
+    //             }
+    //         }
+    //     }
+    // }
 
-
-
-
+    protected void Move()
+    {
+        navMeshAgent.destination = GPlanner.MakePlan(goals[0]);
+    }
 
 }

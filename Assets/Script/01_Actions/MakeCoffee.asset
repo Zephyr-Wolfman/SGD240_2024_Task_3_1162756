@@ -10,11 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
-  m_Name: ChaseRat
+  m_Name: MakeCoffee
   m_EditorClassIdentifier: 
   actionName: 
   cost: 0
-  PreConBools: []
-  PreConFloats: []
-  PostEffectBools: []
-  PostEffectFloats: []
+  actionDuration: 5
+  nextLocation: {x: 0, y: 0, z: 0}
+  preCons: []
+  postEffects:
+  - state: 
+    value: 0
+    energyImpact: 0
+    bladderImpact: 0
+    moraleImpact: 0
+    CoffeeSupplyImpact: 1

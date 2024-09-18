@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: GoToLocation
   cost: 0
-  nextlocation: {x: 0, y: 0, z: 0}
+  actionDuration: 0
+  nextLocation: {fileID: 2233765267473620984, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
   preCons: []
   postEffects:
-  - state: KitchenVacant
-    value: 1
+  - state: 
+    value: 0
+    energyImpact: 0.2
+    bladderImpact: 0
+    moraleImpact: 0.1
+    CoffeeSupplyImpact: 0

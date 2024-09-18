@@ -2,20 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GPlanner : MonoBehaviour
+public static class GPlanner
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public static Vector3 MakePlan(GGoalSO goal)
     {
-        
+        return goal.Actions[0].GetLocation();
     }
-
 
 
 }
