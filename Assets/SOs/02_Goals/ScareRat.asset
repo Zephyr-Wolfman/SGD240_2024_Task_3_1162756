@@ -10,5 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68475da2215dc42bba16e90136beee30, type: 3}
-  m_Name: IncreaseEnergy
+  m_Name: ScareRat
   m_EditorClassIdentifier: 
+  goalName: ScareRat
+  actions:
+  - {fileID: 11400000, guid: e7cd0abcf66074c02928b48eef778e32, type: 2}

@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
-  m_Name: DrinkCoffee
+  m_Name: ChaseRat
   m_EditorClassIdentifier: 
-  actionName: DrinkCoffee
+  actionName: 
   cost: 0
-  actionDuration: 5
-  nextLocation: {fileID: 0}
-  preCons: []
-  postEffects:
-  - state: KitchenVacant
-    value: 1
-    energyImpact: 0.5
-    bladderImpact: 0.5
-    moraleImpact: 0.3
+  actionDuration: 0
+  nextLocation: {fileID: 7049798238934486071, guid: 8c01ba9626bbd4f13a25c250922614f7, type: 3}
+  preCons:
+  - state: 
+    value: 0
+    energyImpact: 0
+    bladderImpact: 0
+    moraleImpact: 0
     CoffeeSupplyImpact: 0
-  - state: CoffeeAvailable
-    value: 1
-    energyImpact: 0.5
-    bladderImpact: 0.5
-    moraleImpact: 0.3
+  postEffects:
+  - state: 
+    value: 0
+    energyImpact: 0.2
+    bladderImpact: 0
+    moraleImpact: 0
     CoffeeSupplyImpact: 0

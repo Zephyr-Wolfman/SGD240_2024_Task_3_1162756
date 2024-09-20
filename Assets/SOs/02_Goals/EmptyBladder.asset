@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68475da2215dc42bba16e90136beee30, type: 3}
   m_Name: EmptyBladder
   m_EditorClassIdentifier: 
+  goalName: EmptyBladder
+  actions:
+  - {fileID: 11400000, guid: 7019e52b6b25d4f25a4480a136d9f2ff, type: 2}

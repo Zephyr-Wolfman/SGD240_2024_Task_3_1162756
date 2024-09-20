@@ -14,7 +14,7 @@ public class GAgentBase : MonoBehaviour
     [SerializeField]
     protected float moraleLevel = 1f;
     [SerializeField]
-    protected float patrolQuota = 1f;
+    protected float patrolQuota = 0.5f;
     [SerializeField]
     protected bool ratDetected = false;
     [SerializeField]
@@ -38,7 +38,7 @@ public class GAgentBase : MonoBehaviour
     protected void Update()
     {
         SetGoalPriority();
-        Move();
+        ExecutePlan();
         // ExecuteActionsPostEffects();
     }
 
@@ -128,7 +128,7 @@ public class GAgentBase : MonoBehaviour
     //     }
     // }
 
-    protected void Move()
+    protected void ExecutePlan()
     {
         navMeshAgent.destination = GPlanner.MakePlan(goals[0]);
     }
