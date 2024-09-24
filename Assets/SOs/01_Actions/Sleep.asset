@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
   m_Name: Sleep
   m_EditorClassIdentifier: 
-  actionName: 
+  actionName: Sleep
   cost: 0
-  actionDuration: 10
-  nextLocation: {fileID: 1981626751204177585, guid: 2a57787c56f074128bf079948e2a0ac9, type: 3}
-  preCons: []
-  postEffects:
-  - state: BunkVacant
-    value: 0
+  actionDuration: 5
+  conditions:
+    preCons:
+    - state: BunkVacant
+      value: 1
+    postEffects: []
     energyImpact: 0
     bladderImpact: 0
     moraleImpact: 0

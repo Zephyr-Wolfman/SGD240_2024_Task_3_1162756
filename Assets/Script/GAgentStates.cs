@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// [System.Serializable]
-// public class AgentState
-// {
-//     public string state;
-//     public bool value;
-// }
 
 public class GAgentStates : MonoBehaviour
 {
-    private Dictionary<string, bool> agentStates = new Dictionary<string, bool>();
+    private Dictionary<string, bool> agentStates;
 
-    public void AgentStates()
+    private void Start()
     {
+        InitAgentStates();
+    }
+
+    private void InitAgentStates()
+    {
+        agentStates = new Dictionary<string, bool>();
         agentStates.Add("InKitchen", false);
         agentStates.Add("HasCoffee", false);
         agentStates.Add("InBathroom", false);

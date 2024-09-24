@@ -12,15 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
   m_Name: UseToilet
   m_EditorClassIdentifier: 
-  actionName: 
+  actionName: UseToilet
   cost: 0
-  actionDuration: 5
-  nextLocation: {fileID: 2233765267473620984, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
-  preCons: []
-  postEffects:
-  - state: BathroomVacant
-    value: 0
+  actionDuration: 12
+  conditions:
+    preCons:
+    - state: BathroomVacant
+      value: 1
+    postEffects:
+    - state: BathroomVacant
+      value: 0
     energyImpact: 0
     bladderImpact: 1
-    moraleImpact: 0.2
+    moraleImpact: 0
     CoffeeSupplyImpact: 0

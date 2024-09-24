@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
   m_Name: MakeCoffee
   m_EditorClassIdentifier: 
-  actionName: 
+  actionName: MakeCoffee
   cost: 0
   actionDuration: 5
-  nextLocation: {fileID: 8535309940947799910, guid: e88096af0aa504ed3861c872f66ab459, type: 3}
-  preCons:
-  - state: CoffeeAvailable
-    value: 1
-    energyImpact: 0
+  conditions:
+    preCons:
+    - state: InKitchen
+      value: 1
+    - state: CoffeeAvailable
+      value: 1
+    postEffects:
+    - state: HasCoffee
+      value: 1
+    energyImpact: 1
     bladderImpact: 0
     moraleImpact: 0
-    CoffeeSupplyImpact: 0
-  postEffects:
-  - state: 
-    value: 0
-    energyImpact: 0
-    bladderImpact: 0
-    moraleImpact: 0
-    CoffeeSupplyImpact: 1
+    CoffeeSupplyImpact: -1

@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
   m_Name: Chat
   m_EditorClassIdentifier: 
-  actionName: 
+  actionName: Chat
   cost: 0
   actionDuration: 5
-  nextLocation: {fileID: 4088167094421134333, guid: d79c65acbad834caca1c764f46753e61, type: 3}
-  preCons: []
-  postEffects:
-  - state: 
-    value: 0
+  conditions:
+    preCons: []
+    postEffects: []
     energyImpact: 0
     bladderImpact: 0
-    moraleImpact: 0.5
+    moraleImpact: 0
     CoffeeSupplyImpact: 0
