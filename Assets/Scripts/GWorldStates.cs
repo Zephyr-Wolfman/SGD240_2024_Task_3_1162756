@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary> 
-/// Manages the global states of the world, like room vacancy status and resources such as coffee level
+/// Manages the global states of the world, like room vacancy status and resources such as coffee level.
+/// Implements lazy instaniation of a singlton
 /// </summary>
 public class GWorldStates : MonoBehaviour
 {
-    private float coffeeLevel = 1;
+    private int coffeeLevel = 1;
     private Dictionary<string, bool> worldStates;
 
     private static GWorldStates instance;
-
     public static GWorldStates Instance
     {
         get
@@ -26,10 +25,18 @@ public class GWorldStates : MonoBehaviour
         }
     }
 
-
-    private void Start()
+    // Initialise world states dictionary
+    private void Awake()
     {
         InitWorldStatesDict();
+    }
+
+    private void Update()
+    {
+        foreach (var state in worldStates)
+        {
+            // Debug.Log($"World state: {state.Key} is {state.Value}");
+        }
     }
 
     // Initilises the world states dictionary and adds initial the defalt states
@@ -43,7 +50,7 @@ public class GWorldStates : MonoBehaviour
         worldStates.Add("BunkVacant", true);
     }
 
-    // public access to update the world state
+    // Sets the value of a world state
     public void SetWorldState(string state, bool value)
     {
         if (worldStates.ContainsKey(state))
@@ -56,7 +63,7 @@ public class GWorldStates : MonoBehaviour
         }
     }
 
-    // public access to get the world state
+    // Returns the value of a world state
     public bool GetWorldState(string state)
     {
         if (worldStates.ContainsKey(state))
@@ -67,16 +74,18 @@ public class GWorldStates : MonoBehaviour
         {
             return false;
         }
-
     }
 
-    // public access to update the coffee levels
-    public float SetCoffeeLevel(float coffeeChange)
+    // Returns a copy of the world states dictionary
+    public Dictionary<string, bool> GetWorldStatesDict()
+    {
+        return new Dictionary<string, bool>(worldStates);
+    }
+
+    // Updates the coffee supply levels
+    public int SetCoffeeLevel(int coffeeChange)
     {
         coffeeLevel += coffeeChange;
         return coffeeLevel;
     }
-
-
-
 }

@@ -16,6 +16,7 @@ public class GActionSO : ScriptableObject
     private float cost;
     [SerializeField]
     private float actionDuration;
+       
     // [SerializeField]
     // private Vector3 nextLocation;    
     [SerializeField]
@@ -25,7 +26,7 @@ public class GActionSO : ScriptableObject
     public string ActionName => actionName;
     public float Cost => cost;
     public float ActionDuration => actionDuration;
-    public Vector3 GetLocation() => GLocations.Instance.GetNextWaypoint(actionName);
+    public Vector3 GetLocation(GameObject agent) => GLocations.Instance.GetNextWaypoint(actionName, agent);
     public Conditions PreConsPostFX => conditions;
 }
 
@@ -43,10 +44,11 @@ public class Conditions
     public List<StateValue> PreCons => preCons;
     public List<StateValue> PostEffects => postEffects;
 
-    public float energyImpact;
-    public float bladderImpact;
-    public float moraleImpact;
-    public float CoffeeSupplyImpact;
+    public int energyImpact;
+    public int bladderImpact;
+    public int moraleImpact;
+    public int CoffeeSupplyImpact;
+    public int PatrolQuotaImpact;
 }
 
 [System.Serializable]

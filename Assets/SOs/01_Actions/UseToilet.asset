@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: UseToilet
   cost: 0
-  actionDuration: 12
+  actionDuration: 2
   conditions:
     preCons:
     - state: BathroomVacant
       value: 1
     postEffects:
-    - state: BathroomVacant
-      value: 0
-    energyImpact: 0
-    bladderImpact: 1
+    - state: BladderEmpty
+      value: 1
+    energyImpact: -2
+    bladderImpact: 2
     moraleImpact: 0
     CoffeeSupplyImpact: 0
+    PatrolQuotaImpact: 0

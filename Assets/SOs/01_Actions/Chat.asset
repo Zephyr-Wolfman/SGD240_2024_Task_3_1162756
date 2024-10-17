@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Chat
   cost: 0
-  actionDuration: 5
+  actionDuration: 2
   conditions:
     preCons: []
     postEffects: []
@@ -22,3 +22,4 @@ MonoBehaviour:
     bladderImpact: 0
     moraleImpact: 0
     CoffeeSupplyImpact: 0
+    PatrolQuotaImpact: 0

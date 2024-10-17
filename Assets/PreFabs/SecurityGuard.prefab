@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 4128665713721542115}
   - component: {fileID: 4128665713721542114}
   - component: {fileID: 4128665713721542140}
-  - component: {fileID: 4128665713721542141}
+  - component: {fileID: 8586383309859651814}
   - component: {fileID: 8722226128584935445}
   m_Layer: 0
   m_Name: SecurityGuard
-  m_TagString: Untagged
+  m_TagString: SecurityGuard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4128665713721542141
+--- !u!114 &8586383309859651814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,21 +151,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4128665713721542117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe0ab1e8c150346308234bd878d89ce7, type: 3}
+  m_Script: {fileID: 11500000, guid: 42bbb314bef2e4986be633933a82072b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyLevel: 1
-  bladderLevel: 0.52
-  moraleLevel: 1
-  patrolQuota: 0.5
+  energyLevel: 10
+  bladderLevel: 10
+  moraleLevel: 10
+  patrolQuota: 10
   ratDetected: 0
   currentGoal: 0
   goals:
-  - {fileID: 11400000, guid: aa003c84c09b14121983210991254eb1, type: 2}
   - {fileID: 11400000, guid: 05b75638052454b88a3b20a7a65ad085, type: 2}
-  - {fileID: 11400000, guid: 8b2e02a8523f3475e85b6107592eb6e2, type: 2}
   - {fileID: 11400000, guid: fc940f5425d12438099a9ff9f49a48d1, type: 2}
+  - {fileID: 11400000, guid: aa003c84c09b14121983210991254eb1, type: 2}
   - {fileID: 11400000, guid: ffd3a277310144f2eba9cbd915ecdd70, type: 2}
+  - {fileID: 11400000, guid: 8b2e02a8523f3475e85b6107592eb6e2, type: 2}
   achievalbleActions: []
 --- !u!114 &8722226128584935445
 MonoBehaviour:

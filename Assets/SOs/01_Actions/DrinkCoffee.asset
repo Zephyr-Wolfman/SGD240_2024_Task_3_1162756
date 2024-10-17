@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: DrinkCoffee
   cost: 0
-  actionDuration: 5
+  actionDuration: 2
   conditions:
     preCons:
     - state: HasCoffee
       value: 1
     postEffects:
-    - state: HasCoffee
+    - state: EnergyIncreased
       value: 1
-    energyImpact: 0.3
-    bladderImpact: -0.5
-    moraleImpact: 0.2
-    CoffeeSupplyImpact: 0
+    energyImpact: 1
+    bladderImpact: -1
+    moraleImpact: 0
+    CoffeeSupplyImpact: 1
+    PatrolQuotaImpact: 0

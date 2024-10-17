@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: ChaseRat
   cost: 0
-  actionDuration: 5
+  actionDuration: 2
   conditions:
     preCons:
     - state: RatDetected
-      value: 1
+      value: 0
     postEffects: []
     energyImpact: 0
     bladderImpact: 0
     moraleImpact: 0
     CoffeeSupplyImpact: 0
+    PatrolQuotaImpact: 0

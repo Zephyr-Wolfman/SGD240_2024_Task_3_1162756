@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: MakeCoffee
   cost: 0
-  actionDuration: 5
+  actionDuration: 2
   conditions:
     preCons:
-    - state: InKitchen
-      value: 1
-    - state: CoffeeAvailable
+    - state: KitchenVacant
       value: 1
     postEffects:
     - state: HasCoffee
       value: 1
-    energyImpact: 1
+    energyImpact: 0
     bladderImpact: 0
     moraleImpact: 0
     CoffeeSupplyImpact: -1
+    PatrolQuotaImpact: 0

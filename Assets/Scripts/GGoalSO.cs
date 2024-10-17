@@ -10,11 +10,17 @@ public class GGoalSO : ScriptableObject
     [SerializeField]
     private string goalName;
     [SerializeField]
+    private int priority;
+    [SerializeField]
     private GActionSO[] actions;
+    [SerializeField]
+    private List<StateValue> desiredStates;
     
     // Properties to access the fields
     public string GoalName => goalName;
-    public GActionSO[] Actions => actions; 
+    public int Priority => priority;    
+    public GActionSO[] Actions => actions;
+    public List<StateValue> DesiredStates => desiredStates; 
 
 }
 

@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary> 
+/// Manages the idividual agent states using a dictionary of state flags.
+/// Attach this script to all agent prefabs
+/// </summary>
 public class GAgentStates : MonoBehaviour
 {
     private Dictionary<string, bool> agentStates;
 
-    private void Start()
+    // Initialise agent states dictionary
+    private void Awake()
     {
         InitAgentStates();
     }
 
+    // Setup states for agent
     private void InitAgentStates()
     {
         agentStates = new Dictionary<string, bool>();
@@ -21,8 +26,13 @@ public class GAgentStates : MonoBehaviour
         agentStates.Add("InBunkroom", false);
         agentStates.Add("RatDetected", false);        
         agentStates.Add("NearGuard", false);        
+        agentStates.Add("CanPatrol", true);        
+        agentStates.Add("Patrolling", false);        
+        agentStates.Add("EnergyIncreased", false);        
+        agentStates.Add("BladderEmpty", false);        
     }
 
+    // Updates the value of an agent state
     public void SetAgentState(string state, bool value)
     {
         if (agentStates.ContainsKey(state))
@@ -31,6 +41,7 @@ public class GAgentStates : MonoBehaviour
         }
     }
 
+    // Returns the value of an agent state
     public bool GetAgentState(string state)
     {
         if (agentStates.ContainsKey(state))
@@ -41,5 +52,11 @@ public class GAgentStates : MonoBehaviour
         {
             return false;
         }
+    }
+
+    // Returns a copy of the agent states dictionary
+    public Dictionary<string, bool> GetAgentStatesDict()
+    {
+        return new Dictionary<string, bool>(agentStates);
     }
 }

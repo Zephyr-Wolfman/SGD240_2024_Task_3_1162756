@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
-  m_Name: GoToNextPatrolPoint
+  m_Name: Patrol
   m_EditorClassIdentifier: 
-  actionName: GoToNextPatrolPoint
+  actionName: Patrol
   cost: 0
-  actionDuration: 5
+  actionDuration: 0
   conditions:
-    preCons: []
-    postEffects: []
-    energyImpact: 0
+    preCons:
+    - state: Patrolling
+      value: 0
+    postEffects:
+    - state: Patrolling
+      value: 1
+    energyImpact: -1
     bladderImpact: 0
     moraleImpact: 0
     CoffeeSupplyImpact: 0
+    PatrolQuotaImpact: -1
