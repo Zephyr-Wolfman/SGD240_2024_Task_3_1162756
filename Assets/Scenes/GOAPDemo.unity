@@ -1242,6 +1242,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5388352267095564747, guid: d76d5c6ba2661470b9e5a9100539aa7e, type: 3}
   m_PrefabInstance: {fileID: 5388352267365747853}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &858141923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1298239856}
+    m_Modifications:
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233765267473620984, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+      propertyPath: m_Name
+      value: Bathroom_Sink
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+--- !u!1 &858141924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2233765267473620984, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+  m_PrefabInstance: {fileID: 858141923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &858141925 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
+  m_PrefabInstance: {fileID: 858141923}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &886499897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2233765267473620983, guid: eae4992b23df24e80a9468b66d2b0dfc, type: 3}
@@ -2231,6 +2300,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 886499897}
+  - {fileID: 858141925}
   - {fileID: 1591169484}
   - {fileID: 1086684369}
   m_Father: {fileID: 1609048206}
@@ -2904,14 +2974,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0ab1e8c150346308234bd878d89ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentGoal: 0
+  goals:
+  - {fileID: 11400000, guid: 05b75638052454b88a3b20a7a65ad085, type: 2}
   energyLevel: 100
   bladderLevel: 0
   moraleLevel: 0
   patrolQuota: 0
   ratDetected: 0
-  currentGoal: 0
-  goals:
-  - {fileID: 11400000, guid: 05b75638052454b88a3b20a7a65ad085, type: 2}
 --- !u!114 &1568276494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,6 +3256,7 @@ MonoBehaviour:
   - {fileID: 416929056}
   - {fileID: 1755033240}
   - {fileID: 2008618174}
+  - {fileID: 858141924}
   agents:
   - {fileID: 1568276482}
   patrolWaypoints: {fileID: 11400000, guid: 826c5e1db64b943e0aaee0922eaee86e, type: 2}
@@ -4984,6 +5055,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
+      propertyPath: energyLevel
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
+      propertyPath: patrolQuota
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
+      propertyPath: bladderLevel
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
+      propertyPath: goals.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: fc940f5425d12438099a9ff9f49a48d1, type: 2}
     - target: {fileID: 8586383309859651814, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
       propertyPath: energyLevel
       value: 5
@@ -5024,7 +5111,8 @@ PrefabInstance:
       propertyPath: goals.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 8b2e02a8523f3475e85b6107592eb6e2, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8722226128584935445, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
 --- !u!1001 &4295243442824185975
@@ -5380,7 +5468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7049798238934486071, guid: 8c01ba9626bbd4f13a25c250922614f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

@@ -53,6 +53,8 @@ public class GLocations : MonoBehaviour
         {
             case "UseToilet":
                 return roomObjs[0].transform.position;
+            case "WashHands":
+                return roomObjs[3].transform.position;
             case "MakeCoffee":
                 return roomObjs[1].transform.position;
             case "DrinkCoffee":

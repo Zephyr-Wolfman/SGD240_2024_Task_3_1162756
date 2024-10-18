@@ -30,6 +30,7 @@ public class GAgentStates : MonoBehaviour
         agentStates.Add("Patrolling", false);        
         agentStates.Add("EnergyIncreased", false);        
         agentStates.Add("BladderEmpty", false);        
+        agentStates.Add("HandsClean", false);        
     }
 
     // Updates the value of an agent state

@@ -9,16 +9,6 @@ using UnityEngine;
 public class GAgentBase : MonoBehaviour
 {
     [SerializeField]
-    protected int energyLevel = 10;
-    [SerializeField]
-    protected int bladderLevel = 10;
-    [SerializeField]
-    protected int moraleLevel = 10;
-    [SerializeField]
-    protected int patrolQuota = 10;
-    [SerializeField]
-    protected bool ratDetected = false;
-    [SerializeField]
     protected int currentGoal = 0;
     protected bool planIsUpdated = true;
     protected bool postEffectsExecuted = false;
@@ -71,47 +61,13 @@ public class GAgentBase : MonoBehaviour
             goals.Remove(topGoal);
             goals.Insert(index, topGoal);
             achievableActions.Clear();
-            // IsActionAchievable(goals[0].GoalName);
         }
     }
 
     // Set the goal priority based on current conditions
-    protected void SetGoalPriority()
+    protected virtual void SetGoalPriority()
     {
-        if (ratDetected)
-        {
-            ReorderGoals("ScareRat", 0);
-            currentGoal = 1;
-        }
 
-        else if (patrolQuota <= 10)
-        {
-            if (energyLevel < 5 && energyLevel < bladderLevel && energyLevel < moraleLevel)
-            {
-                ReorderGoals("IncreaseEnergy", 0);
-                currentGoal = 3;
-            }
-            else if (bladderLevel < 5 && bladderLevel < energyLevel && bladderLevel < moraleLevel)
-            {
-                ReorderGoals("EmptyBladder", 0);
-                currentGoal = 2;
-            }
-            else if (moraleLevel < 5 && moraleLevel < energyLevel && moraleLevel < bladderLevel)
-            {
-                ReorderGoals("IncreaseMorale", 0);
-                currentGoal = 4;
-            }
-            else
-            {
-                ReorderGoals("Patrol", 0);
-                currentGoal = 0;
-            }
-        }
-        else
-        {
-            ReorderGoals("Patrol", 0);
-            currentGoal = 0;
-        }
     }
 
     // Creates and executes the plan for the agent based on current states
@@ -161,9 +117,9 @@ public class GAgentBase : MonoBehaviour
             Debug.Log($"Waiting for {currentAction.ActionDuration} seconds for action: {currentAction.ActionName}");
 
             yield return new WaitForSeconds(currentAction.ActionDuration);
-            // SetRoomStatus();
+
             ExecuteActionsPostEffects(currentAction.ActionName);
-            agentStates.SetAgentState("Patrolling", false);
+
         }
         Debug.Log("All actions in the queue have been executed.");
     }
@@ -190,7 +146,6 @@ public class GAgentBase : MonoBehaviour
                                 Debug.Log($"State: {effect.state} is {worldStates.GetWorldState(effect.state)}");
                             }
 
-
                             foreach (var effect in postEffects)
                             {
                                 agentStates.SetAgentState(effect.state, effect.value);
@@ -200,26 +155,27 @@ public class GAgentBase : MonoBehaviour
                             }
                         }
                         UpdateAgentLevels(action);
+
+                        // if (action.ActionName == "DrinkCoffee")
+                        // {
+                        //     agentStates.SetAgentState("KitchenVacant", true);
+                        //     Debug.Log($"Patrolling Agent State: {agentStates.GetAgentState("Patrolling")}");
+                        // }
                     }
                 }
             }
         }
         postEffectsExecuted = true;
+        agentStates.SetAgentState("KitchenVacant", true);
+        Debug.Log($"KitchenVacant World State: {worldStates.GetWorldState("KitchenVacant")}");
         Debug.Log("postEffectsExecuted = " + postEffectsExecuted);
         planIsUpdated = true;
     }
 
     // Updates the agent levels after each action is executed
-    protected void UpdateAgentLevels(GActionSO action)
+    protected virtual void UpdateAgentLevels(GActionSO action)
     {
-        energyLevel += action.PreConsPostFX.energyImpact;
-        energyLevel = Mathf.Clamp(energyLevel, 0, 10);
-        bladderLevel += action.PreConsPostFX.bladderImpact;
-        bladderLevel = Mathf.Clamp(bladderLevel, 0, 10);
-        moraleLevel += action.PreConsPostFX.moraleImpact;
-        moraleLevel = Mathf.Clamp(moraleLevel, 0, 10);
-        patrolQuota += action.PreConsPostFX.PatrolQuotaImpact;
-        patrolQuota = Mathf.Clamp(patrolQuota, 0, 10);
+
     }
 
 

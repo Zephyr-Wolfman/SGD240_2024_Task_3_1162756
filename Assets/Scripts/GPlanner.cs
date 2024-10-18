@@ -33,8 +33,6 @@ public static class GPlanner
     {
         Node startNode = new Node(null, 0, worldState, agentState, null);
         HashSet<Node> closedList = new HashSet<Node>();
-        // HashSet<Node> closedList = new HashSet<Node>(new NodeEqualityComparer());
-       
         Node goalNode = FindPath(startNode, new HashSet<GActionSO>(availableActions), goalState, closedList);
 
         if (goalNode != null)
@@ -53,7 +51,13 @@ public static class GPlanner
     {
         if (GoalAchieved(currentNode, goalState))
         {
+            Debug.Log($"Goal Achieved: '{GoalAchieved(currentNode, goalState)}'");
             return currentNode;
+        }
+        else
+        {
+            Debug.Log($"Goal Achieved: '{GoalAchieved(currentNode, goalState)}'");
+
         }
 
         closedList.Add(currentNode);
@@ -155,7 +159,6 @@ public static class GPlanner
     // Checks if node is already in the list
     private static bool NodeInList(Node node, HashSet<Node> nodelist)
     {
-        // return nodelist.Contains(node);
         foreach (Node newNode in nodelist)
         {
             if (AreNodesEqual(node, newNode))
@@ -182,7 +185,7 @@ public static class GPlanner
 
     // Checks size, keys and values of two dictionaries and returns true or false is equal
     private static bool StateEqual(Dictionary<string, bool> dictA, Dictionary<string, bool> dictB)
-    {        
+    {
         if (dictA.Count != dictB.Count)
         {
             return false;
@@ -192,7 +195,7 @@ public static class GPlanner
         {
             if (!dictB.ContainsKey(kvp.Key))
             {
-                return false;   
+                return false;
             }
             bool result = dictB[kvp.Key];
 
