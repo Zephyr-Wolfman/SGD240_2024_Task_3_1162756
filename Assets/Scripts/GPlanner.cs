@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,11 +29,12 @@ public static class GPlanner
     }
 
     // Creates a plan to achieve the goal from the world and agent states
-    // Used Depth-First Search Algorithm to find a sequence of actions
     public static Queue<GActionSO> Plan(List<GActionSO> availableActions, List<StateValue> goalState, Dictionary<string, bool> worldState, Dictionary<string, bool> agentState)
     {
         Node startNode = new Node(null, 0, worldState, agentState, null);
-        HashSet<Node> closedList = new HashSet<Node>(new NodeEqualityComparer());
+        HashSet<Node> closedList = new HashSet<Node>();
+        // HashSet<Node> closedList = new HashSet<Node>(new NodeEqualityComparer());
+       
         Node goalNode = FindPath(startNode, new HashSet<GActionSO>(availableActions), goalState, closedList);
 
         if (goalNode != null)
@@ -46,6 +48,7 @@ public static class GPlanner
     }
 
     // Recursive search for a sequence of actions
+    // Uses Depth-First Search Algorithm to find a sequence of actions
     private static Node FindPath(Node currentNode, HashSet<GActionSO> actions, List<StateValue> goalState, HashSet<Node> closedList)
     {
         if (GoalAchieved(currentNode, goalState))
@@ -59,15 +62,15 @@ public static class GPlanner
         {
             if (ActionUsable(action, currentNode))
             {
-                Node newNode = CreateNewNode(action, currentNode);
+                Node childNode = CreateChildNode(action, currentNode);
 
-                if (!NodeInList(newNode, closedList))
+                if (!NodeInList(childNode, closedList))
                 {
-                    Node result = FindPath(newNode, actions, goalState, closedList);
+                    Node resultNode = FindPath(childNode, actions, goalState, closedList);
 
-                    if (result != null)
+                    if (resultNode != null)
                     {
-                        return result;
+                        return resultNode;
                     }
                 }
             }
@@ -83,9 +86,14 @@ public static class GPlanner
             bool worldValue = false;
             bool agentValue = false;
 
-            node.WorldState.TryGetValue(goal.state, out worldValue);
-            node.AgentState.TryGetValue(goal.state, out agentValue);
-
+            if (node.WorldState.ContainsKey(goal.state))
+            {
+                worldValue = node.WorldState[goal.state];
+            }
+            if (node.AgentState.ContainsKey(goal.state))
+            {
+                agentValue = node.AgentState[goal.state];
+            }
             if (worldValue != goal.value && agentValue != goal.value)
             {
                 Debug.Log($"Goal state '{goal.state}' is not achieved. WorldState: {worldValue}, AgentState: {agentValue}, DesiredGoal: {goal.value}");
@@ -102,9 +110,14 @@ public static class GPlanner
         {
             bool worldValue = false;
             bool agentValue = false;
-            node.WorldState.TryGetValue(preCon.state, out worldValue);
-            node.AgentState.TryGetValue(preCon.state, out agentValue);
-
+            if (node.WorldState.ContainsKey(preCon.state))
+            {
+                worldValue = node.WorldState[preCon.state];
+            }
+            if (node.AgentState.ContainsKey(preCon.state))
+            {
+                agentValue = node.AgentState[preCon.state];
+            }
             if (worldValue != preCon.value && agentValue != preCon.value)
             {
                 Debug.Log($"Action '{action.ActionName}' is not usable because '{preCon.state}' is not met");
@@ -115,7 +128,7 @@ public static class GPlanner
     }
 
     // Creates a new node by applying the action's effects to current node's state
-    private static Node CreateNewNode(GActionSO action, Node parent)
+    private static Node CreateChildNode(GActionSO action, Node parent)
     {
         var newWorldState = new Dictionary<string, bool>(parent.WorldState);
         var newAgentState = new Dictionary<string, bool>(parent.AgentState);
@@ -142,52 +155,53 @@ public static class GPlanner
     // Checks if node is already in the list
     private static bool NodeInList(Node node, HashSet<Node> nodelist)
     {
-        return nodelist.Contains(node);
+        // return nodelist.Contains(node);
+        foreach (Node newNode in nodelist)
+        {
+            if (AreNodesEqual(node, newNode))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    // Compares two node's world and agent states
-    public class NodeEqualityComparer : IEqualityComparer<Node>
+    // Return true or false if two nodes are equal base on their world and agent state
+    private static bool AreNodesEqual(Node nodeA, Node nodeB)
     {
-        public bool Equals(Node nodeA, Node nodeB)
+        if (!StateEqual(nodeA.WorldState, nodeB.WorldState))
         {
-            return StateEqual(nodeA.WorldState, nodeB.WorldState) && StateEqual(nodeA.AgentState, nodeB.AgentState);
+            return false;
+        }
+        if (!StateEqual(nodeA.AgentState, nodeB.AgentState))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    // Checks size, keys and values of two dictionaries and returns true or false is equal
+    private static bool StateEqual(Dictionary<string, bool> dictA, Dictionary<string, bool> dictB)
+    {        
+        if (dictA.Count != dictB.Count)
+        {
+            return false;
         }
 
-        // Creates a hash code fro the node by combining world and agent state hash codes
-        // Uses prime numbers to minimise comparison collision
-        public int GetHashCode(Node obj)
+        foreach (var kvp in dictA)
         {
-            int hash = 17;
-
-            foreach (var kvp in obj.WorldState)
+            if (!dictB.ContainsKey(kvp.Key))
             {
-                hash = hash * 31 + kvp.Key.GetHashCode() + kvp.Value.GetHashCode();
+                return false;   
             }
+            bool result = dictB[kvp.Key];
 
-            foreach (var kvp in obj.AgentState)
-            {
-                hash = hash * 31 + kvp.Key.GetHashCode() + kvp.Value.GetHashCode();
-            }
-            return hash;
-        }
-
-        // Compares two dictionaries to check if they are equal
-        private bool StateEqual(Dictionary<string, bool> dictA, Dictionary<string, bool> dictB)
-        {
-            if (dictA.Count != dictB.Count)
+            if (result != kvp.Value)
             {
                 return false;
             }
-
-            foreach (var kvp in dictA)
-            {
-                if (!dictB.TryGetValue(kvp.Key, out bool result) || result != kvp.Value)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
+        return true;
     }
 
     // Builds a queue of actions from the goal node by walking back to the root
