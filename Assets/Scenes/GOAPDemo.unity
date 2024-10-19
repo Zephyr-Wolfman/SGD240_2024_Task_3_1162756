@@ -2977,6 +2977,7 @@ MonoBehaviour:
   currentGoal: 0
   goals:
   - {fileID: 11400000, guid: 05b75638052454b88a3b20a7a65ad085, type: 2}
+  rb: {fileID: 0}
   energyLevel: 100
   bladderLevel: 0
   moraleLevel: 0
@@ -5057,20 +5058,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
       propertyPath: energyLevel
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
       propertyPath: patrolQuota
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
       propertyPath: bladderLevel
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
+      propertyPath: goals.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: fc940f5425d12438099a9ff9f49a48d1, type: 2}
     - target: {fileID: 6637997381552208372, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
       propertyPath: goals.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: fc940f5425d12438099a9ff9f49a48d1, type: 2}
+      objectReference: {fileID: 11400000, guid: aa003c84c09b14121983210991254eb1, type: 2}
     - target: {fileID: 8586383309859651814, guid: ba4c394f90d884b849e77347cf62ec5d, type: 3}
       propertyPath: energyLevel
       value: 5

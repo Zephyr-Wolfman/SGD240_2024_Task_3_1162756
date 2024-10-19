@@ -16,6 +16,7 @@ MonoBehaviour:
   priority: 0
   actions:
   - {fileID: 11400000, guid: 7019e52b6b25d4f25a4480a136d9f2ff, type: 2}
+  - {fileID: 11400000, guid: f0fc3c12b48c64374a7892dfcbe89350, type: 2}
   desiredStates:
-  - state: BladderEmpty
+  - state: HandsClean
     value: 1

@@ -57,10 +57,7 @@ public class GWorldStates : MonoBehaviour
         {
             worldStates[state] = value;
         }
-        else
-        {
-            worldStates.Add(state, value);
-        }
+       
     }
 
     // Returns the value of a world state

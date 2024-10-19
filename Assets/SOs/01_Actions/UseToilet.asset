@@ -22,7 +22,7 @@ MonoBehaviour:
     postEffects:
     - state: BladderEmpty
       value: 1
-    energyImpact: -2
+    energyImpact: 0
     bladderImpact: 2
     moraleImpact: 0
     CoffeeSupplyImpact: 0

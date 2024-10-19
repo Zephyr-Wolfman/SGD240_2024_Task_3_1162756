@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc435e803dad3482a8acc218e781514b, type: 3}
   m_Name: WashHands
   m_EditorClassIdentifier: 
-  actionName: 
+  actionName: WashHands
   cost: 0
-  actionDuration: 0
+  actionDuration: 2
   conditions:
-    preCons: []
-    postEffects: []
+    preCons:
+    - state: BladderEmpty
+      value: 1
+    postEffects:
+    - state: HandsClean
+      value: 1
     energyImpact: 0
     bladderImpact: 0
     moraleImpact: 0

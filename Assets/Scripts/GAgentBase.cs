@@ -15,7 +15,6 @@ public class GAgentBase : MonoBehaviour
     [SerializeField]
     protected List<GGoalSO> goals = new List<GGoalSO>();
     [SerializeField]
-    protected HashSet<GActionSO> achievableActions = new HashSet<GActionSO>();
     protected Rigidbody rb;
     protected GWorldStates worldStates;
     protected GAgentStates agentStates;
@@ -33,9 +32,11 @@ public class GAgentBase : MonoBehaviour
     // Sets goal priotity and executes the plan
     protected void Update()
     {
+        SetGoalPriority();
         if (planIsUpdated)
         {
-            SetGoalPriority();
+            agentStates.SetAgentState("Patrolling", false);
+            Debug.Log($"Reset Patrolling Agent State: {agentStates.GetAgentState("Patrolling")}");
             ExecutePlan();
             planIsUpdated = false;
         }
@@ -60,7 +61,6 @@ public class GAgentBase : MonoBehaviour
         {
             goals.Remove(topGoal);
             goals.Insert(index, topGoal);
-            achievableActions.Clear();
         }
     }
 
@@ -87,6 +87,7 @@ public class GAgentBase : MonoBehaviour
         {
             Debug.Log("No plan found.");
         }
+
     }
 
     // Executes the queue of actions and handles agent movement
@@ -96,9 +97,7 @@ public class GAgentBase : MonoBehaviour
         while (actionQueue.Count > 0)
         {
             GActionSO currentAction = actionQueue.Dequeue();
-
             Vector3 targetPosition = currentAction.GetLocation(this.gameObject);
-
             navMeshAgent.destination = targetPosition;
 
             Debug.Log("Agent is moving towards location");
@@ -120,9 +119,13 @@ public class GAgentBase : MonoBehaviour
 
             ExecuteActionsPostEffects(currentAction.ActionName);
 
+
         }
         Debug.Log("All actions in the queue have been executed.");
+
+        planIsUpdated = true;
     }
+
 
     // Applies the post effects of the current action to the world and agent states
     protected void ExecuteActionsPostEffects(string actionName)
@@ -169,7 +172,7 @@ public class GAgentBase : MonoBehaviour
         agentStates.SetAgentState("KitchenVacant", true);
         Debug.Log($"KitchenVacant World State: {worldStates.GetWorldState("KitchenVacant")}");
         Debug.Log("postEffectsExecuted = " + postEffectsExecuted);
-        planIsUpdated = true;
+        // planIsUpdated = true;
     }
 
     // Updates the agent levels after each action is executed

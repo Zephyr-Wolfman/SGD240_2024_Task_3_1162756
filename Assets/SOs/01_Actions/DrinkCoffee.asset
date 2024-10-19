@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DrinkCoffee
   m_EditorClassIdentifier: 
   actionName: DrinkCoffee
-  cost: 0
+  cost: 5
   actionDuration: 2
   conditions:
     preCons:

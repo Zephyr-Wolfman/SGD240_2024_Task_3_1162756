@@ -107,7 +107,7 @@ public static class GPlanner
         return true;
     }
 
-    // Checks if an action can be used with the current node's state
+    // Cycles through the actions preconditions and compares them to the world and agent state to determine if an action can be used with the current node's state
     private static bool ActionUsable(GActionSO action, Node node)
     {
         foreach (var preCon in action.PreConsPostFX.PreCons)
